@@ -13,7 +13,12 @@ import feedRoutes from "./routes/feedRoutes.js";
 const app = express();
 app.set("trust proxy", 1);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(morgan("dev"));
 app.get("/", (req, res) => {
@@ -28,7 +33,6 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/feed", feedRoutes);
 
 app.use(express.static("public"));
-
 app.use(notFound);
 app.use(errorHandler);
 

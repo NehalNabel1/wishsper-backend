@@ -1,5 +1,7 @@
 import { User } from "../models/User.js";
-import { signToken } from "../middleware/auth.js";
+import { 
+  
+ } from "../middleware/auth.js";
 import { HttpError } from "../middleware/errorHandler.js";
 
 export async function signup(req, res, next) {
