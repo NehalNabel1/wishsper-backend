@@ -10,10 +10,10 @@ export async function signup(req, res, next) {
     if (existingName) {
       throw new HttpError(
         409,
-        `This username is ${existingName} already exists`,
+        `This username is already exists`,
       );
     } else if (existingEmail) {
-      throw new HttpError(409, `This email is ${existingEmail} already exists`);
+      throw new HttpError(409, `This email is  already exists`);
     }
     const passwordHash = await User.hashPassword(password);
     const user = await User.create({
