@@ -5,13 +5,17 @@ import { HttpError } from "../middleware/errorHandler.js";
 export async function signup(req, res, next) {
   try {
     const { username, email, password, displayName } = req.body;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      throw new HttpError(400, "Invalid email format");
+    }
+    if (!password || password.length < 6) {
+      throw new HttpError(400, "Password must be at least 6 characters");
+    }
     const existingEmail = await User.findOne({ email: email });
     const existingName = await User.findOne({ username: username });
     if (existingName) {
-      throw new HttpError(
-        409,
-        `This username is already exists`,
-      );
+      throw new HttpError(409, `This username is already exists`);
     } else if (existingEmail) {
       throw new HttpError(409, `This email is  already exists`);
     }

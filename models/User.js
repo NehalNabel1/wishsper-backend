@@ -62,14 +62,14 @@ userSchema.set("toJSON", {
 userSchema.methods.comparePassword = function (plain) {
   // TODO:
   // Hint: bcrypt.compare(plain, this.passwordHash) — returns a Promise<boolean>.
-  // throw new Error('not implemented');
+
   return bcrypt.compare(plain, this.passwordHash);
 };
 
 userSchema.statics.hashPassword = function (plain) {
   // TODO:
   // Hint: bcrypt.hash(plain, 10). Cost 10 is a reasonable default.
-  // throw new Error("not implemented");
+ 
   return bcrypt.hash(plain, 10);
 };
 
